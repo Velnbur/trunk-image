@@ -1,0 +1,19 @@
+* trunk-image
+
+A docker image with [[https://trunkrs.dev/][trunk]] builder inside it.
+
+For example for building wasm bundle:
+#+begin_src dockerifle
+FROM ghcr.io/velnbur/trunk:master
+
+# copy project
+WORKDIR /usr/src/
+COPY . .
+
+# build project
+RUN trunk build --release
+
+EXPOSE 80
+
+CMD ["trunk", "serve", "--release", "--address", "0.0.0.0", "--port", "80"]
+#+end_src
